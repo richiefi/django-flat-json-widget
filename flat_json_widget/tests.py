@@ -9,8 +9,6 @@ class TestFlatJsonWidget(TestCase):
         html = widget.render(name='content', value=None)
         self.assertIn('flat-json-original-textarea', html)
         self.assertIn('flat-json-textarea', html)
-        self.assertIn('icon-addlink.svg', html)
-        self.assertIn('icon-changelink.svg', html)
 
     def test_media(self):
         widget = FlatJsonWidget()
