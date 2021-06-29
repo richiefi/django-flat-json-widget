@@ -83,10 +83,7 @@ var initJsonKeyValueWidget = function(fieldName, inlinePrefix) {
     // generate UI
     compileUI({ replaceOriginal: true });
 
-    // cache other objects that we'll reuse
-    var row_html = retrieveTemplate('flat-json-row-template', fieldName),
-        emptyRow = _.template(row_html)({ 'key': '', 'value': '' }),
-        $json = $('#id_'+fieldName).parents('.flat-json');
+    var $json = $('#id_'+fieldName).parents('.flat-json');
 
     // reusable function that updates the textarea value
     var updateTextarea = function(container) {
@@ -106,50 +103,6 @@ var initJsonKeyValueWidget = function(fieldName, inlinePrefix) {
         // update textarea value
         $(rawTextarea).val(JSON.stringify(newValue, null, 4));
     };
-
-    // remove row link
-    $json.delegate('a.flat-json-remove-row', 'click', function(e) {
-        e.preventDefault();
-        // cache container jquery object before $(this) gets removed
-        $(this).parents('.form-row').eq(0).remove();
-        updateTextarea($json);
-    });
-
-    // add row link
-    $json.delegate('a.flat-json-add-row', 'click', function(e) {
-        e.preventDefault();
-        $json.find('.flat-json-rows').append(emptyRow);
-    });
-
-    // toggle textarea link
-    $json.delegate('.flat-json-toggle-textarea', 'click', function(e) {
-        e.preventDefault();
-
-        var rawTextarea = $json.find('.flat-json-textarea'),
-            jsonRows = $json.find('.flat-json-rows'),
-            addRow = $json.find('.flat-json-add-row');
-
-        if(rawTextarea.css('display') !== 'none') {
-            var compiledUi = compileUI();
-            // in case of JSON error
-            if(compiledUi === false){
-                return;
-            }
-
-            var $ui = $($.parseHTML(compiledUi));
-
-            // update rows with only relevant content
-            jsonRows.html($ui.find('.flat-json-rows').html());
-            rawTextarea.hide();
-            jsonRows.show();
-            addRow.show();
-        }
-        else{
-            rawTextarea.show();
-            jsonRows.hide();
-            addRow.hide();
-        }
-    });
 
     // update textarea whenever a field changes
     $json.delegate('input[type=text]', 'input propertychange', function() {

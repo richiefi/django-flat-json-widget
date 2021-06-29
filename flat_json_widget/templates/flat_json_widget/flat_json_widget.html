@@ -8,9 +8,6 @@
                    type="text"
                    placeholder="{% trans 'value' %}"
                    class="flat-json-value">
-            <a href="#" class="flat-json-remove-row" title="{% trans 'remove row' %}">
-                <img src="{% static 'admin/img/icon-deletelink.svg' %}">
-            </a>
         </div>
     </div>
 </script>
@@ -39,24 +36,11 @@
                 <%= _.template(django.jQuery('.flat-json-row-template-inline').eq(0).html())({ 'key': key, 'value': data[key] }) %>
             <% } %>
         </div>
-
         <div class="form-row field-data flat-json-textarea" style="display:none">
             <div>
                 <label for="<%= id %>" class="required">{% trans 'Raw JSON Editing' %}:</label>
                 <textarea class="vLargeTextField" cols="40" id="<%= id %>" name="<%= name %>" rows="10"><%= value %></textarea>
             </div>
-        </div>
-
-        <div class="form-row">
-            <a href="#" class="flat-json-add-row" title="{% trans 'Add another row' %}">
-                <img src="{% static 'admin/img/icon-addlink.svg' %}" alt="">
-                {% trans "Add row" %}
-            </a>
-
-            <a href="#" class="flat-json-toggle-textarea" title="{% trans 'toggle textarea' %}" style="float:right">
-                <img src="{% static 'admin/img/icon-changelink.svg' %}" alt="">
-                {% trans 'Toggle Raw JSON Editing' %}
-            </a>
         </div>
     </div>
 </script>
