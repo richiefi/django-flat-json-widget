@@ -2,8 +2,8 @@
 <script type="text/html" id="flat-json-row-template-{{ field_name }}" class="flat-json-row-template-inline">
     <div class="form-row field-data">
         <div>
-            <input type="text" placeholder="{% trans 'key' %}" value="<%= key %>" class="flat-json-key">
-            <strong>:</strong>
+            <input type="hidden" value="<%= key %>">
+            <label class="flat-json-key"><strong><%= key %>:</strong></label>
             <input value="<%= _.escape(value) %>"
                    type="text"
                    placeholder="{% trans 'value' %}"
